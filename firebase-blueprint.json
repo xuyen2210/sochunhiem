@@ -1,0 +1,259 @@
+{
+  "entities": {
+    "Class": {
+      "title": "Class",
+      "description": "Thông tin lớp học",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "classname": { "type": "string" },
+        "name": { "type": "string" },
+        "grade": { "type": "string" },
+        "schoolYear": { "type": "string" },
+        "homeroomTeacher": { "type": "string" },
+        "homeroomTeacherName": { "type": "string" },
+        "note": { "type": "string" },
+        "room": { "type": "string" },
+        "totalStudents": { "type": "number" },
+        "teacherPhone": { "type": "string" },
+        "teacherEmail": { "type": "string" }
+      },
+      "required": ["classname", "schoolYear", "homeroomTeacher"]
+    },
+    "Student": {
+      "title": "Student",
+      "description": "Hồ sơ học sinh",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "classId": { "type": "string" },
+        "studentCode": { "type": "string" },
+        "fullname": { "type": "string" },
+        "fullName": { "type": "string" },
+        "gender": { "type": "string", "enum": ["male", "female"] },
+        "dob": { "type": "string" },
+        "avatar": { "type": "string" },
+        "address": { "type": "string" },
+        "phone": { "type": "string" },
+        "parentsId": { "type": "string" },
+        "parentId": { "type": "string" },
+        "status": { "type": "string", "enum": ["active", "transferred", "deferred"] },
+        "academicRank": { "type": "string" },
+        "conduct": { "type": "string" },
+        "notes": { "type": "string" }
+      },
+      "required": ["classId", "fullname", "gender"]
+    },
+    "Parent": {
+      "title": "Parent",
+      "description": "Hồ sơ phụ huynh",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "fullname": { "type": "string" },
+        "phone": { "type": "string" },
+        "email": { "type": "string" },
+        "relationship": { "type": "string" },
+        "studentId": { "type": "string" }
+      },
+      "required": ["fullname", "phone", "studentId"]
+    },
+    "Attendance": {
+      "title": "Attendance",
+      "description": "Bản ghi điểm danh",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "classId": { "type": "string" },
+        "studentId": { "type": "string" },
+        "date": { "type": "string" },
+        "status": { "type": "string", "enum": ["PRESENT", "ABSENT", "LATE", "EXCUSED", "present", "absent", "late", "excused"] },
+        "note": { "type": "string" },
+        "recordedBy": { "type": "string" }
+      },
+      "required": ["classId", "studentId", "date", "status"]
+    },
+    "Behavior": {
+      "title": "Behavior",
+      "description": "Bản ghi thi đua khen thưởng và kỷ luật",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "classId": { "type": "string" },
+        "studentId": { "type": "string" },
+        "studentName": { "type": "string" },
+        "date": { "type": "string" },
+        "type": { "type": "string", "enum": ["PRAISE", "WARN", "VIOLATION", "warning", "praise", "violation"] },
+        "title": { "type": "string" },
+        "content": { "type": "string" },
+        "points": { "type": "number" },
+        "criterionCode": { "type": "string" },
+        "isSensitive": { "type": "boolean" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["classId", "studentId", "date", "type", "points"]
+    },
+    "Announcement": {
+      "title": "Announcement",
+      "description": "Thông báo của giáo viên",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "classId": { "type": "string" },
+        "title": { "type": "string" },
+        "content": { "type": "string" },
+        "target": { "type": "string", "enum": ["all", "student", "parent"] },
+        "pinned": { "type": "boolean" },
+        "category": { "type": "string" },
+        "authorName": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["title", "content", "createdAt"]
+    },
+    "Task": {
+      "title": "Task",
+      "description": "Nhiệm vụ, bài tập",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "classId": { "type": "string" },
+        "title": { "type": "string" },
+        "description": { "type": "string" },
+        "dueDate": { "type": "string" },
+        "requireReply": { "type": "boolean" },
+        "priority": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["title", "classId", "dueDate"]
+    },
+    "TaskReply": {
+      "title": "TaskReply",
+      "description": "Phản hồi nộp bài của học sinh",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "taskId": { "type": "string" },
+        "studentId": { "type": "string" },
+        "studentName": { "type": "string" },
+        "replyText": { "type": "string" },
+        "content": { "type": "string" },
+        "fileUrl": { "type": "string" },
+        "fileName": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["taskId", "studentId"]
+    },
+    "Thread": {
+      "title": "Thread",
+      "description": "Kênh tin nhắn",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "classId": { "type": "string" },
+        "studentId": { "type": "string" },
+        "parentId": { "type": "string" },
+        "participantName": { "type": "string" },
+        "lastMessage": { "type": "string" },
+        "lastMessageAt": { "type": "string" }
+      },
+      "required": ["classId"]
+    },
+    "Message": {
+      "title": "Message",
+      "description": "Tin nhắn trao đổi",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "threadId": { "type": "string" },
+        "fromRole": { "type": "string" },
+        "content": { "type": "string" },
+        "senderId": { "type": "string" },
+        "senderName": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["threadId", "content"]
+    },
+    "Document": {
+      "title": "Document",
+      "description": "Tài liệu biểu mẫu",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "classId": { "type": "string" },
+        "title": { "type": "string" },
+        "category": { "type": "string" },
+        "fileUrl": { "type": "string" },
+        "fileSize": { "type": "string" },
+        "uploadedBy": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["title", "category"]
+    },
+    "Report": {
+      "title": "Report",
+      "description": "Báo cáo định kỳ tuần/tháng",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "classId": { "type": "string" },
+        "type": { "type": "string", "enum": ["weekly", "monthly"] },
+        "periodLabel": { "type": "string" },
+        "periodNumber": { "type": "number" },
+        "year": { "type": "number" },
+        "attendanceRate": { "type": "number" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["classId", "type", "periodLabel"]
+    }
+  },
+  "firestore": {
+    "/classes/{classId}": {
+      "schema": "Class",
+      "description": "Danh sách các lớp học do giáo viên chủ nhiệm quản lý"
+    },
+    "/students/{studentId}": {
+      "schema": "Student",
+      "description": "Danh sách học sinh theo lớp, thông tin cá nhân và định danh"
+    },
+    "/parents/{parentId}": {
+      "schema": "Parent",
+      "description": "Hồ sơ liên lạc phụ huynh học sinh"
+    },
+    "/attendance/{attendanceId}": {
+      "schema": "Attendance",
+      "description": "Sổ điểm danh chuyên cần theo ngày và lớp"
+    },
+    "/behaviors/{behaviorId}": {
+      "schema": "Behavior",
+      "description": "Bản ghi nề nếp thi đua khen thưởng và nhắc nhở học sinh"
+    },
+    "/announcements/{announcementId}": {
+      "schema": "Announcement",
+      "description": "Bảng tin thông báo của GVCN tới học sinh và phụ huynh"
+    },
+    "/tasks/{taskId}": {
+      "schema": "Task",
+      "description": "Nhiệm vụ, bài tập và khảo sát thu thập hồ sơ"
+    },
+    "/taskReplies/{replyId}": {
+      "schema": "TaskReply",
+      "description": "Bài làm, phản hồi nộp nhiệm vụ của học sinh/phụ huynh"
+    },
+    "/threads/{threadId}": {
+      "schema": "Thread",
+      "description": "Kênh trao đổi tin nhắn giữa GVCN và phụ huynh"
+    },
+    "/messages/{messageId}": {
+      "schema": "Message",
+      "description": "Tin nhắn trao đổi chi tiết trong từng hội thoại"
+    },
+    "/documents/{documentId}": {
+      "schema": "Document",
+      "description": "Tài liệu biểu mẫu, kế hoạch giảng dạy và đề cương"
+    },
+    "/reports/{reportId}": {
+      "schema": "Report",
+      "description": "Báo cáo tổng kết thi đua và chuyên cần tuần/tháng"
+    }
+  }
+}

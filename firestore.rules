@@ -1,0 +1,91 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Basic auth check
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isValidId(id) {
+      return id is string && id.size() > 0 && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    // Connection testing endpoint
+    match /test/{docId} {
+      allow read: if true;
+      allow write: if isSignedIn();
+    }
+
+    // Classes collection
+    match /classes/{classId} {
+      allow read: if true;
+      allow write: if isSignedIn() && isValidId(classId);
+    }
+
+    // Students collection
+    match /students/{studentId} {
+      allow read: if true;
+      allow write: if isSignedIn() && isValidId(studentId);
+    }
+
+    // Parents collection
+    match /parents/{parentId} {
+      allow read: if true;
+      allow write: if isSignedIn() && isValidId(parentId);
+    }
+
+    // Attendance records
+    match /attendance/{attendanceId} {
+      allow read: if true;
+      allow write: if isSignedIn() && isValidId(attendanceId);
+    }
+
+    // Behavior records
+    match /behaviors/{behaviorId} {
+      allow read: if true;
+      allow write: if isSignedIn() && isValidId(behaviorId);
+    }
+
+    // Announcements
+    match /announcements/{announcementId} {
+      allow read: if true;
+      allow write: if isSignedIn() && isValidId(announcementId);
+    }
+
+    // Tasks & Assignments
+    match /tasks/{taskId} {
+      allow read: if true;
+      allow write: if isSignedIn() && isValidId(taskId);
+    }
+
+    // Task Replies
+    match /taskReplies/{replyId} {
+      allow read: if true;
+      allow write: if isSignedIn() && isValidId(replyId);
+    }
+
+    // Communication Threads
+    match /threads/{threadId} {
+      allow read: if true;
+      allow write: if isSignedIn() && isValidId(threadId);
+    }
+
+    // Messages
+    match /messages/{messageId} {
+      allow read: if true;
+      allow write: if isSignedIn() && isValidId(messageId);
+    }
+
+    // Documents & Guidelines
+    match /documents/{documentId} {
+      allow read: if true;
+      allow write: if isSignedIn() && isValidId(documentId);
+    }
+
+    // Emulation Reports
+    match /reports/{reportId} {
+      allow read: if true;
+      allow write: if isSignedIn() && isValidId(reportId);
+    }
+  }
+}

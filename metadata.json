@@ -1,0 +1,6 @@
+{
+  "name": "Web Quản Lý Lớp Chủ Nhiệm & AI Headshot Studio",
+  "description": "Hệ thống quản lý lớp học chủ nhiệm cho GVCN và Phụ huynh học sinh, tích hợp studio tạo ảnh thẻ & chân dung nghề nghiệp chuyên nghiệp bằng AI.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
